@@ -1,14 +1,14 @@
 import socket
 
 sock = socket.socket()
-sock.bind(('', 9091))
+sock.bind(('', 9090))
 sock.listen(2)
 
 msg = ''
 
 while msg != "exit":
 	conn, addr = sock.accept()
-	print("Connected: ", addr)
+	print(f"Connected to: {addr}")
 	msg = ''
 	while True:
 		data = conn.recv(1024)
@@ -16,7 +16,7 @@ while msg != "exit":
 			break
 		msg += data.decode()
 		conn.send(data)
-	print(msg)
-
+		print(msg)
+		msg = ''
 
 conn.close()
